@@ -129,10 +129,8 @@ func parseHTTP2(f *http2.Framer, c chan types.ParsedFrame) {
 			}
 
 			for _, h := range h2Headers {
-				h := fmt.Sprintf("%q: %q", h.Name, h.Value)
-				h = strings.Trim(h, "\"")
-				h = strings.Replace(h, "\": \"", ": ", -1)
-				p.Headers = append(p.Headers, h)
+  				headerStr := fmt.Sprintf("%s: %s", h.Name, h.Value)
+   	 			p.Headers = append(p.Headers, headerStr)
 			}
 			if frame.HasPriority() {
 				prio := types.Priority{}
